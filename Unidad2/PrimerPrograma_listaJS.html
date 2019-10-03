@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 10</title>
+    </head>
+    
+    <body>
+
+        <h1>Ejercicio 10</h1>
+    
+       <form id="form">
+           <input type="text" placeholder="Numero" id="numero">
+           <button id="boton" type="reset" onclick="capturar()">Ingresar</button>
+       </form>
+        
+        
+        <ul id="listaDesordenada"></ul>
+    
+    <script>
+        
+        function capturar(){
+            numeroCapturar = document.getElementById("numero").value;
+            
+            agregar();
+        }
+        
+        var arreglo = [];
+        
+        function agregar(){
+            
+            var li = document.createElement("li");
+            var lista = document.getElementById("listaDesordenada");
+            
+            if(arreglo.length <= 4){
+                
+                arreglo.push(numeroCapturar);
+            
+                //Agregar numero en html
+                lista.insertBefore(li, lista.firstElementChild);
+                li.innerHTML += numeroCapturar;
+                li.id = arreglo.length;
+                console.log(li.id);
+                
+                
+            }else{
+                
+                arreglo.shift(arreglo[0]);
+                arreglo.push(numeroCapturar);
+                
+                
+                //Eliminar en html
+                var padre = document.getElementsByTagName("li")[4].parentNode;
+                var eliminar = document.getElementsByTagName("li")[4];
+                padre.removeChild(eliminar);
+                
+                
+                //Agregar el nuevo numero en html
+                lista.insertBefore(li, lista.firstElementChild);
+                li.innerHTML += numeroCapturar;
+                li.id = arreglo.length;
+                console.log(li.id);
+                
+                /*Remplazar
+                var nuevo = document.createElement("li");
+                var contenido = document.createTextNode(numeroCapturar);
+                nuevo.appendChild(contenido);
+                
+                var padre  = document.getElementsByTagName("li")[0].parentNode;
+                var rem = document.getElementsByTagName("li")[0];
+                padre.replaceChild(remplazo, rem);*/
+                
+            }
+            
+            console.log(arreglo);
+    
+        }
+        
+        /*$("#boton").addEventListener("click", function(){
+            
+        })*/
+        
+        /*function $(selector){
+            return document.querySelector(selector);
+        }*/
+        
+    </script>
+    </body>
+</html>
